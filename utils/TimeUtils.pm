@@ -1,13 +1,29 @@
 #!/usr/bin/perl
 
-
 package utils::TimeUtils;
 
 use strict;
 use warnings;
 
+use Exporter;
 use Time::Local;
+use vars qw/@ISA @VERSION @EXPORT @EXPORT_OK/;
 
+@ISA = qw (Exporter);
+@EXPORT = @EXPORT_OK;
+@EXPORT_OK = qw (
+	get_cur_datetime_raw
+	get_cur_datetime
+	get_datetime_from_timestamp
+	get_datetime_from_timestamp_raw
+	get_time_format
+	get_time_format1
+
+	add_min add_sec add_hour add_day
+	sub_min sub_sec sub_hour sub_day
+);
+
+our $VERSION = '1.1';
 
 =head1 &get_cur_datetime_raw
 Get current datetime. All each fields as an entity of a Hash.
@@ -205,6 +221,7 @@ sub _sub {
 }
 
 1;
+
 __END__
 
 =head1
