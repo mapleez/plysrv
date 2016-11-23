@@ -19,6 +19,11 @@ use vars qw/@ISA @VERSION @EXPORT @EXPORT_OK/;
 	get_time_format
 	get_time_format1
 
+	get_timestamp_from_hs
+	get_timestamp_from_hs_raw
+
+	equal_datetime 
+	create_datetime 
 	add_min add_sec add_hour add_day
 	sub_min sub_sec sub_hour sub_day
 );
@@ -41,6 +46,26 @@ Hour is 24 hour format.
 sub get_cur_datetime_raw {
 	&get_datetime_from_timestamp_raw (time);
 }
+
+
+=head1
+year mon mday hour min sec
+=cut
+sub create_datetime {
+	my %hs = (
+		year => shift,
+		mon => shift,
+		mday => shift,
+		hour => shift,
+		min => shift,
+		sec => shift,
+		yday => 0,
+		isdst => 0,
+		wday => 0
+	);
+	%hs;
+}
+
 
 =head1 &get_cur_datetime
 Get current datetime. 
@@ -101,6 +126,19 @@ sub get_time_format1 {
 	. ' ' . &_one_dig_to_two ($hs {'hour'})
 	. ':' . &_one_dig_to_two ($hs {'min'})
 	. ':' . &_one_dig_to_two ($hs {'sec'});
+}
+
+
+sub equal_datetime {
+	my ($a, $b) = @_;
+	if ($a && $b) {
+		my $tm_a = &get_timestamp_from_hs (%{$a});
+		my $tm_b = &get_timestamp_from_hs (%{$b});
+		return 0 if $tm_a == $tm_b;
+		return 1 if $tm_a < $tm_b;
+		return -1 if $tm_a > $tm_b;
+	}
+	-2;
 }
 
 =head1 &_one_dig_to_two ($digits)
