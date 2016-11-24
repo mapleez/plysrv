@@ -5,7 +5,7 @@ package utils::TimeUtils;
 use strict;
 use warnings;
 
-use Exporter;
+require Exporter;
 use Time::Local;
 use vars qw/@ISA @VERSION @EXPORT @EXPORT_OK/;
 
