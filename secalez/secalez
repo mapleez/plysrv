@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Getopt::Args qw/class_optargs/;
+my ($class, $opts) = &class_optargs ('tool::secalez');
+
+$class -> run ($opts);
+# $class -> can ('run') -> ($opts);
+

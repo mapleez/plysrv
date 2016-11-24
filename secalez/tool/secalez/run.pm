@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-package secalez::run;
+package tool::secalez::run;
 
 use strict;
 use warnings;

@@ -1,13 +1,12 @@
 #!/usr/bin/perl
 
-package secalez;
+package tool::secalez;
 
 use strict;
 use warnings;
 
 # https://metacpan.org/pod/Getopt::Args
-# use Getopt::Args;
-use OptArgs;
+use Getopt::Args;
 
 # The argument to indicate tool.
 arg tool => (
@@ -26,7 +25,8 @@ subcmd (
 	comment => 'Run command that I defined.'
 );
 
-my $ref = optargs;
+# my $ref = optargs;
 # print &usage ($ref);
 
+1;
 

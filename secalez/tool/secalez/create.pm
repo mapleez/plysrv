@@ -1,12 +1,11 @@
 #!/usr/bin/perl
 
-package secalez::create;
+package tool::secalez::create;
 
 use strict;
 use warnings;
 
-use OptArgs;
-
+use Getopt::Args;
 
 sub run  {
 	print "create\n";
