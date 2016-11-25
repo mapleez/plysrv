@@ -7,8 +7,11 @@ use warnings;
 
 use Getopt::Args;
 
+my $cmd = "create";
+
 sub run  {
-	print "create\n";
+	my ($self, $opts) = @_;
+	print $opts -> {name}, "\n";
 }
 
 

@@ -9,7 +9,7 @@ use OptArgs;
 
 
 sub run  {
-	print "run\n";
+	my ($self, $opts) = @_;
 }
 
 
