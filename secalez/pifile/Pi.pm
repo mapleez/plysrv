@@ -11,7 +11,7 @@ use vars qw /@ISA @EXPORT @EXPORT_OK/;
 @ISA = qw /Exporter/;
 @EXPORT = @EXPORT_OK;
 @EXPORT_OK = qw /
-new create_new _dbg_print/;
+new create_pifile _dbg_print/;
 
 my $fname = "pi.sk";
 my %default_val = (
@@ -38,7 +38,7 @@ sub new {
 		}
 	}
 	bless $this, $class;
-	return $this;
+	$this;
 }
 
 sub load {
@@ -46,14 +46,12 @@ sub load {
 	my $this = {};
 }
 
-sub create_new {
+sub create_pifile {
 	my $this = shift;
 	my $file = $this -> get_path;
 	if ( -r $file ) {
 ASK:
-		print <<EOF;
-Existing a project in current path: $file; Create a new one in any case? [y|n]: 
-EOF
+		print "Existing a project in current path: $file; Create a new one in any case? [y|n]: ";
 		my $repo = <>;
 		exit (0) if $repo =~ /n|no/i;
 		goto CREATE if $repo =~ /y|yes/i;
