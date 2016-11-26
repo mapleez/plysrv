@@ -45,7 +45,7 @@ sub add {
 # Return the element or undef;
 sub exist {
 	my ($this, $k) = (shift, shift);
-	&first { $_ -> {name} eq $k } @$this;
+	&first { defined $_ && $_ -> {name} eq $k } @$this;
 }
 
 sub remove {
@@ -59,6 +59,12 @@ sub remove {
 		$idx ++;
 	}
 	$i;
+}
+
+sub _dbg_print {
+	my ($this) = shift;
+	map {$_ -> _dbg_print 
+		if defined $_} @$this;
 }
 
 1;
