@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# project info file.
+
 package pifile::Pi;
 
 use strict;
@@ -14,33 +16,41 @@ use vars qw /@ISA @EXPORT @EXPORT_OK/;
 new create_pifile _dbg_print/;
 
 my $fname = "pi.sk";
-my %default_val = (
-	version => '1.0',
-	name => 'secalez-proj',
-	author => 'ez',
-	root => '.',
-	output => 'target/classes',
-	depend => 'lib/',
-	src => 'src/main',
-	test => 'src/test',
-	info => ''
-);
+# my %default_val = (
+# 	version => '1.0',
+# 	name => 'secalez-proj',
+# 	author => 'ez',
+# 	root => '.',
+# 	output => 'target/classes',
+# 	depend => 'lib/',
+# 	src => 'src/main',
+# 	test => 'src/test',
+# 	info => ''
+# );
 
 sub new {
-	my ($class, %param) = @_;
-	my $this = {};
+	my ($class, $param) = @_;
+	my $this = $param;
+
 	# parameter initialize.
-	foreach my $k (keys %default_val) {
-		unless (exists $param {$k}) {
-			$this -> {$k} = $default_val {$k}
-		} else {
-			$this -> {$k} = $param {$k};
-		}
-	}
+	# my %params = %$param;
+	# while (my ($k, $v) = each %params) {
+	# 	$this -> {$k} = $v;
+	# }
+
+	# foreach my $k (keys %default_val) {
+	# 	unless (exists $param {$k} || defined ($param {$k})) {
+	# 		$this -> {$k} = $default_val {$k}
+	# 	} else {
+	# 		$this -> {$k} = $param {$k};
+	# 	}
+	# }
+
 	bless $this, $class;
 	$this;
 }
 
+# TODO...
 sub load {
 	my ($class) = shift;
 	my $this = {};
@@ -63,8 +73,9 @@ CREATE:
 
 sub _create_pifile {
 	my $this = shift;
-	my $path = $this -> get_path;
-	open F, "+>", $path
+	my $fpath = $this -> get_path;
+	&_check_or_create ($this -> {root});
+	open F, "+>", $fpath
 		or die "Create pi file error: $!\n";
 	while (my ($k, $v) = each %{$this}) {
 		print F "$k = $v\n";
@@ -78,6 +89,12 @@ sub _dbg_print {
 	while (my ($k, $v) = each %{$this}) {
 		print "$k => $v\n";
 	}
+}
+
+# check root path and create.
+sub _check_or_create {
+	my $root = shift;
+	`mkdir $root` unless ( -x $root );
 }
 
 sub get_path {

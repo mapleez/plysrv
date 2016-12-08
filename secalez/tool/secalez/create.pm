@@ -16,9 +16,9 @@ my $cmd = "create";
 # TODO...
 sub run  {
 	my ($self, $opts) = @_;
-	print $opts -> {name}, "\n";
-	my $pi = new pifile::Pi (name => $opts -> {name});
-	$pi -> _dbg_print;
+	my $pi = new pifile::Pi ($opts);
+	# $pi -> _dbg_print;
+	$pi -> create_pifile;
 }
 
 

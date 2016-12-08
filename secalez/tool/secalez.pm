@@ -77,6 +77,13 @@ opt test => (
 	default => 'src/test'
 );
 
+opt info => (
+	isa => 'Str',
+	alias => 'i',
+	comment => 'Project description.',
+	default => 'My first secal project.'
+);
+
 
 subcmd (
 	cmd => 'run',
