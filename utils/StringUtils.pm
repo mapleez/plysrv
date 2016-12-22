@@ -33,6 +33,20 @@ sub rand_i {
 	0;
 }
 
+sub rand_str {
+	my ($a) = shift;
+	my $str = "";
+	return $str if ! $a;
+	while ($a --) {
+		$str .= $chars [&rand_i ($#chars)];
+	}
+	$str;
+}
+
+# foreach (1..20) {
+# 	print &rand_str (6), "\n";
+# }
+
 1;
 
 __END__
