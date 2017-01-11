@@ -25,6 +25,19 @@ sub read_file {
 }
 
 
+sub split_recursive_dir {
+	my $dir = shift;
+	my @dirs = split /\/|\/\//, $dir;
+	$dirs [0] = "./" . $dirs [0] if $dirs [0] =~ /[^\.\/|w+]/;
+	@dirs;
+}
+
+
+foreach (@ARGV) {
+	my @res = &split_recursive_dir ($_);
+	print "$_ -> ", "@res\n";
+}
+
 1;
 
 END {
